@@ -158,7 +158,10 @@ def conjugate_gradient(func, grad_func, init_point, num_iter=100,
 
             new_x = line_search(func, x[k], d[k])
 
-            alpha[k] = (new_x - x[k])[0] / d[k][0]
+            for index, val in enumerate(d[k]):
+                if d[k][index] != 0:
+                    alpha[k] = (new_x - x[k])[index] / d[k][index]
+                    break
 
             x[k + 1] = x[k] + alpha[k] * d[k]
 
